@@ -1,0 +1,5 @@
+site_name: Hemlock
+nav:
+  - Home: index.md
+  - Hello world: about.md
+theme: readthedocs
