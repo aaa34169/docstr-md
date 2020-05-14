@@ -1,5 +1,7 @@
-site_name: Hemlock
+site_name: Docstring-Markdown
+docs_dir: docs_md
+site_dir: docs
 nav:
   - Home: index.md
-  - Hello world: about.md
+  - Test: test.md
 theme: readthedocs
