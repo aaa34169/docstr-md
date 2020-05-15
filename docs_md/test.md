@@ -16,17 +16,7 @@
     table.field-table {
         border-radius: 0.1em
     }
-</style># Test
-
-```
-Field0
-
-------
-
-item0 : short description
-
-    long description.
-```
+</style>#Test file
 
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
@@ -54,9 +44,9 @@ This is my function.
     <th class="field-name"><b>Parameters:</b></td>
     <td class="field-body" width="100%"><b>param0 : <i>str</i></b>
 <p class="attr">
-    This is parameter 0. <code>param0</code>.
+    This is parameter 0.
 </p>
-<b>param1 : <i>float</i></b>
+<b>param1 : <i>float, default=1.0</i></b>
 <p class="attr">
     This is parameter 1.
 </p></td>
@@ -86,13 +76,10 @@ hello world
 ##test.**MyClass**
 
 <p class="func-header">
-    <i>class</i> test.<b>MyClass</b>(<i>param0, param1=1, param2=lambda x: x</i>)
+    <i>class</i> test.<b>MyClass</b>(<i>param0, param1=None</i>)
 </p>
 
 This is my class.
-Its description is on multiple lines.
-
-And it's two paragraphs long.
 
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
@@ -104,13 +91,9 @@ And it's two paragraphs long.
 <p class="attr">
     This is parameter 0.
 </p>
-<b>param1 : <i>int</i></b>
+<b>param1 : <i>str or None, default=None</i></b>
 <p class="attr">
     This is parameter 1.
-</p>
-<b>param2 : <i>callable</i></b>
-<p class="attr">
-    This is parameter 2.
 </p></td>
 </tr>
 <tr class="field">
@@ -119,7 +102,7 @@ And it's two paragraphs long.
 <p class="attr">
     This is attribute 0.
 </p>
-<b>attr1 : <i>int</i></b>
+<b>attr1 : <i>str or None</i></b>
 <p class="attr">
     This is attribute 1.
 </p></td>
@@ -134,7 +117,8 @@ This is a note.
 ####Examples
 
 ```python
-print('hello world')
+x = MyClass('param0')
+x.print_greeting()
 ```
 
 Out:
@@ -148,28 +132,10 @@ hello world
 
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self</i>)
-</p>
-
-This is the `__call__` method.
-
-<table class="docutils field-list field-table" frame="void" rules="none">
-    <col class="field-name" />
-    <col class="field-body" />
-    <tbody valign="top">
-        
-    </tbody>
-</table>
-
-
-
-
-
-<p class="func-header">
     <i></i> <b>print_greeting</b>(<i>self, name='world'</i>)
 </p>
 
-This method prints a greeting.
+This method returns a greeting.
 
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
@@ -191,51 +157,3 @@ This method prints a greeting.
 </tr>
     </tbody>
 </table>
-
-
-
-
-
-<p class="func-header">
-    <i></i> <b>print_goodbye</b>(<i>self, name='moon'</i>)
-</p>
-
-This method prints goodbye.
-
-<table class="docutils field-list field-table" frame="void" rules="none">
-    <col class="field-name" />
-    <col class="field-body" />
-    <tbody valign="top">
-        <tr class="field">
-    <th class="field-name"><b>Parameters:</b></td>
-    <td class="field-body" width="100%"><b>name : <i>str, default='moon'</i></b>
-<p class="attr">
-    The name of the person to say goodbye to.
-</p></td>
-</tr>
-<tr class="field">
-    <th class="field-name"><b>Returns:</b></td>
-    <td class="field-body" width="100%"><b>goodbye : <i>str</i></b>
-<p class="attr">
-    Of the form 'goodbye, {name}!'
-</p></td>
-</tr>
-    </tbody>
-</table>
-
-**Notes**
-
-This is a note.
-
-**Examples**
-
-```python
-cls = MyClass(param0, param1)
-cls.print_goodbye()
-```
-
-Out:
-
-```
-goodbye, moon!
-```

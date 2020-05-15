@@ -17,6 +17,10 @@ class SklearnParser():
     raw_sections : iterable of strings
         From `raw_sections` parameter.
 
+    Notes
+    -----
+    `'\\'` functions as an escape character when added to the beginning of a line. Whitespace to its left will be stripped. All text to its right will be treated as raw markdown.
+
     Examples
     --------
     ```python

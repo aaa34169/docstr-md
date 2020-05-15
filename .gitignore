@@ -1,5 +1,9 @@
 __pycache__/
+.*egginfo/
 .ipynb_checkpoints/
+build/
+dist/
 docs_md/
 example.ipynb
 example.py
+test.md

@@ -1,7 +1,4 @@
-"""#Basic Use
-
-
-"""
+"""#Basic Use"""
 
 from .compilers import SklearnCompiler
 from .parsers import SklearnParser

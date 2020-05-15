@@ -54,13 +54,13 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Test</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#srctestmy_func">src.test.my_func</a>
+    <li class="toctree-l2"><a class="reference internal" href="#testmy_func">test.my_func</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#srctestmyclass">src.test.MyClass</a>
+    <li class="toctree-l2"><a class="reference internal" href="#testmyclass">test.MyClass</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a>
     </li>
@@ -71,6 +71,21 @@
         </ul>
     </li>
     </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../python/basic_use/">Basic use</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../python/soup_objects/">Soup objects</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../python/parsers/">Parsers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../python/compilers/">Compilers</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contribute/">Contribute</a>
                     </li>
                 </ul>
       </div>
@@ -124,10 +139,18 @@
     }
 </style>
 
-<h1 id="test">Test</h1>
-<h2 id="srctestmy_func">src.test.<strong>my_func</strong></h2>
+<h1 id="test-file">Test file</h1>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+
+    </tbody>
+</table>
+
+<h2 id="testmy_func">test.<strong>my_func</strong></h2>
 <p class="func-header">
-    <i>def</i> src.test.<b>my_func</b>(<i>param0, param1=1.0</i>)
+    <i>def</i> test.<b>my_func</b>(<i>param0, param1=1.0</i>)
 </p>
 
 <p>This is my function.</p>
@@ -139,9 +162,9 @@
     <th class="field-name"><b>Parameters:</b></td>
     <td class="field-body" width="100%"><b>param0 : <i>str</i></b>
 <p class="attr">
-    This is parameter 0. <code>param0</code>.
+    This is parameter 0.
 </p>
-<b>param1 : <i>float</i></b>
+<b>param1 : <i>float, default=1.0</i></b>
 <p class="attr">
     This is parameter 1.
 </p></td>
@@ -164,14 +187,12 @@
 <pre><code>hello world
 </code></pre>
 
-<h2 id="srctestmyclass">src.test.<strong>MyClass</strong></h2>
+<h2 id="testmyclass">test.<strong>MyClass</strong></h2>
 <p class="func-header">
-    <i>class</i> src.test.<b>MyClass</b>(<i>param0, param1=1, param2=lambda x: x</i>)
+    <i>class</i> test.<b>MyClass</b>(<i>param0, param1=None</i>)
 </p>
 
-<p>This is my class.
-Its description is on multiple lines.</p>
-<p>And it's two paragraphs long.</p>
+<p>This is my class.</p>
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
     <col class="field-body" />
@@ -182,13 +203,9 @@ Its description is on multiple lines.</p>
 <p class="attr">
     This is parameter 0.
 </p>
-<b>param1 : <i>int</i></b>
+<b>param1 : <i>str or None, default=None</i></b>
 <p class="attr">
     This is parameter 1.
-</p>
-<b>param2 : <i>callable</i></b>
-<p class="attr">
-    This is parameter 2.
 </p></td>
 </tr>
 <tr class="field">
@@ -197,7 +214,7 @@ Its description is on multiple lines.</p>
 <p class="attr">
     This is attribute 0.
 </p>
-<b>attr1 : <i>int</i></b>
+<b>attr1 : <i>str or None</i></b>
 <p class="attr">
     This is attribute 1.
 </p></td>
@@ -208,7 +225,8 @@ Its description is on multiple lines.</p>
 <h4 id="notes">Notes</h4>
 <p>This is a note.</p>
 <h4 id="examples_1">Examples</h4>
-<pre><code class="python">print('hello world')
+<pre><code class="python">x = MyClass('param0')
+x.print_greeting()
 </code></pre>
 
 <p>Out:</p>
@@ -220,7 +238,7 @@ Its description is on multiple lines.</p>
     <i></i> <b>print_greeting</b>(<i>self, name='world'</i>)
 </p>
 
-<p>This method prints a greeting.</p>
+<p>This method returns a greeting.</p>
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
     <col class="field-body" />
@@ -241,49 +259,14 @@ Its description is on multiple lines.</p>
 </tr>
     </tbody>
 </table>
-
-<p class="func-header">
-    <i></i> <b>print_goodbye</b>(<i>self, name='moon'</i>)
-</p>
-
-<p>This method prints goodbye.</p>
-<table class="docutils field-list field-table" frame="void" rules="none">
-    <col class="field-name" />
-    <col class="field-body" />
-    <tbody valign="top">
-        <tr class="field">
-    <th class="field-name"><b>Parameters:</b></td>
-    <td class="field-body" width="100%"><b>name : <i>str, default='moon'</i></b>
-<p class="attr">
-    The name of the person to say goodbye to.
-</p></td>
-</tr>
-<tr class="field">
-    <th class="field-name"><b>Returns:</b></td>
-    <td class="field-body" width="100%"><b>goodbye : <i>str</i></b>
-<p class="attr">
-    Of the form 'goodbye, {name}!'
-</p></td>
-</tr>
-    </tbody>
-</table>
-
-<p><strong>Notes</strong></p>
-<p>This is a note.</p>
-<p><strong>Examples</strong></p>
-<pre><code class="python">cls = MyClass(param0, param1)
-cls.print_goodbye()
-</code></pre>
-
-<p>Out:</p>
-<pre><code>goodbye, moon!
-</code></pre>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../python/basic_use/" class="btn btn-neutral float-right" title="Basic use">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -314,6 +297,8 @@ cls.print_goodbye()
       
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../python/basic_use/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

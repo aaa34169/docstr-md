@@ -50,15 +50,36 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
+    <li class="toctree-l2"><a class="reference internal" href="#why-docstring-markdown">Why Docstring-Markdown</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
     </li>
     </ul>
                     </li>
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="test/">Test</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Python</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="python/basic_use/">Basic use</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="python/soup_objects/">Soup objects</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="python/parsers/">Parsers</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="python/compilers/">Compilers</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="contribute/">Contribute</a>
                     </li>
                 </ul>
       </div>
@@ -93,21 +114,39 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+                <h1 id="docstring-markdown">Docstring-Markdown</h1>
+<p>Docstring-Markdown is a fast and easy way to make beautiful documentation markdown files.</p>
+<h2 id="why-docstring-markdown">Why Docstring-Markdown</h2>
+<p>It's time to share your awesome new package with the world. And... get ready to spend the next week making your docs. Or, make beautiful docs with Docstring-Markdown in just a few lines of code.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>$ pip install docstr-md
 </code></pre>
+
+<h2 id="quickstart">Quickstart</h2>
+<p>First, clone a test file from the Docstring-Markdown repo.</p>
+<pre><code class="bash">$ curl https://raw.githubusercontent.com/dsbowen/docstr-md/master/test.py --output test.py
+</code></pre>
+
+<p>The example <code>test.py</code> uses sklearn formatted docstrings. Let's convert it to markdown.</p>
+<pre><code class="python">from docstr_md.python import PySoup, compile_md
+
+soup = PySoup(path='test.py', parser='sklearn')
+compile_md(soup, compiler='sklearn', outfile='test.md')
+</code></pre>
+
+<p>You'll now have a <code>test.md</code> file in your current directory. <a href="test/">This</a> is what it looks like rendered.</p>
+<h2 id="citation">Citation</h2>
+<pre><code>@software{bowen2020docstr-md,
+  author = {Dillon Bowen},
+  title = {Docstring-Markdown},
+  url = {https://dsbowen.github.io/docstr-md/},
+  date = {2020-05-15},
+}
+</code></pre>
+
+<h2 id="license">License</h2>
+<p>Users must cite Docstring-Markdown in any publications which use this software.</p>
+<p>Docstring-Markdown is licensed with the MIT <a href="https://github.com/dsbowen/docstr-md/blob/master/LICENSE">License</a>.</p>
               
             </div>
           </div>
@@ -161,5 +200,5 @@ docs/
 
 <!--
 MkDocs version : 1.1.1
-Build Date UTC : 2020-05-14 22:14:08.745670+00:00
+Build Date UTC : 2020-05-15 23:41:51.002306+00:00
 -->
