@@ -1,1 +1,1 @@
-from docstr_md import python
+from . import python

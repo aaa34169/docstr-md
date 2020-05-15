@@ -3,5 +3,9 @@ docs_dir: docs_md
 site_dir: docs
 nav:
   - Home: index.md
-  - Test: test.md
+  - Python:
+    - Basic use: python/basic_use.md
+    - Soup objects: python/soup_objects.md
+    - Parsers: python/parsers.md
+    - Compilers: python/compilers.md
 theme: readthedocs

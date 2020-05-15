@@ -1,9 +1,16 @@
-'''# Test'''
+'''# Test
+
+```
+Field0
+\------
+\item0 : short description
+\    long description.
+```
+'''
 
 import random
 from random import random
 
-'''## src.test.**my_func**'''
 
 def my_func(param0, param1=1.):
     '''
@@ -35,9 +42,6 @@ def my_func(param0, param1=1.):
     '''
     print(param0, param1)
 
-
-
-'''##src.test.**MyClass**'''
 
 class MyClass():
     '''
@@ -85,6 +89,12 @@ class MyClass():
         self.attr0 = param0
         self.attr1 = param1
         self.attr2 = param2
+
+    def __call__(self):
+        '''
+        This is the `__call__` method.
+        '''
+        pass
 
     def print_greeting(self, name='world'):
         '''

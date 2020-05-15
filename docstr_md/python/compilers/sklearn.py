@@ -1,12 +1,18 @@
-import os
+from ..soup_objects import Expr, FunctionDef, ClassDef
 
 from astor import to_source
 from markdown import markdown
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+import os
+
+dir_path = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    'sklearn_templates'
+)
 
 with open(os.path.join(dir_path, 'head.html'), 'r') as head_f:
     head = head_f.read()
+title_template = '##{path}**{name}**'
 with open(os.path.join(dir_path, 'header.html'), 'r') as f:
     header_template = f.read()
 with open(os.path.join(dir_path, 'table.html'), 'r') as f:
@@ -17,19 +23,37 @@ with open(os.path.join(dir_path, 'item.html'), 'r') as f:
     item_template = f.read()
     
     
-class SklearnCompiler():    
-    def compile(self, soup):
+class SklearnCompiler():
+    """
+    Compiles sklearn-style markdown.
+
+    Examples
+    --------
+    ```python
+    soup = PySoup()
+    ```
+    """
+    def __call__(self, soup):
         return head+'\n\n'.join([self._compile(obj) for obj in soup.objects])
     
     def _compile(self, obj):
-        from docstr_md.python.soup import Expr, FunctionDef, ClassDef
+        if isinstance(obj, str):
+            return obj
         if isinstance(obj, Expr):
-            return obj.docstr['description']
+            return self._compile_docstr(obj.docstr)
         if isinstance(obj, FunctionDef):
             return self._compile_func(obj)
         if isinstance(obj, ClassDef):
             return self._compile_cls(obj)
         raise ValueError('Object not recognized:', obj)
+
+    def _compile_docstr(self, docstr):
+        self.docstr = docstr
+        return '\n\n'.join([
+            docstr['description'],
+            self._compile_fields(),
+            self._compile_sections(),
+        ])
         
     def _compile_cls(self, cls):
         return '\n\n'.join([
@@ -38,18 +62,30 @@ class SklearnCompiler():
         ])
         
     def _compile_func(self, func, method=False, cls=None):
-        self.docstr = func.docstr if cls is None else cls.docstr
         self.method = method
         return '\n\n'.join([
+            self._compile_title(func, cls),
             self._compile_header(func, cls),
-            self.docstr['description'],
-            self._compile_fields(),
-            self._compile_sections(),
+            self._compile_docstr(func.docstr if cls is None else cls.docstr)
         ])
+
+    def _compile_title(self, func, cls):
+        if self.method:
+            return ''
+        if cls is None:
+            path = func.import_path
+            name = func.name
+        else:
+            path = cls.import_path
+            name = cls.name
+        return title_template.format(path=path, name=name)
         
     def _compile_header(self, func, cls):
+        if func is None:
+            # True when class has no __init__ method
+            return ''
         if cls is None:
-            pfx = 'def' if not self.method else ''
+            pfx = '' if self.method else 'def'
             ldelim = '('
             import_path = func.import_path
             name = func.name

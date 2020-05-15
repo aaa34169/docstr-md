@@ -18,10 +18,30 @@
     }
 </style># Test
 
-## src.test.**my_func**
+```
+Field0
+
+------
+
+item0 : short description
+
+    long description.
+```
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        
+    </tbody>
+</table>
+
+
+
+##test.**my_func**
 
 <p class="func-header">
-    <i>def</i> src.test.<b>my_func</b>(<i>param0, param1=1.0</i>)
+    <i>def</i> test.<b>my_func</b>(<i>param0, param1=1.0</i>)
 </p>
 
 This is my function.
@@ -63,10 +83,10 @@ Out:
 hello world
 ```
 
-##src.test.**MyClass**
+##test.**MyClass**
 
 <p class="func-header">
-    <i>class</i> src.test.<b>MyClass</b>(<i>param0, param1=1, param2=lambda x: x</i>)
+    <i>class</i> test.<b>MyClass</b>(<i>param0, param1=1, param2=lambda x: x</i>)
 </p>
 
 This is my class.
@@ -125,6 +145,26 @@ hello world
 
 ####Methods
 
+
+
+<p class="func-header">
+    <i></i> <b>__call__</b>(<i>self</i>)
+</p>
+
+This is the `__call__` method.
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        
+    </tbody>
+</table>
+
+
+
+
+
 <p class="func-header">
     <i></i> <b>print_greeting</b>(<i>self, name='world'</i>)
 </p>
@@ -151,6 +191,8 @@ This method prints a greeting.
 </tr>
     </tbody>
 </table>
+
+
 
 
 
