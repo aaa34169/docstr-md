@@ -1,9 +1,9 @@
 __pycache__/
-.*egginfo/
+.*egg-info/
 .ipynb_checkpoints/
 build/
 dist/
-docs_md/
-example.ipynb
-example.py
+docs_md*/
+mkdocs.py
+mkdocs.yml
 test.md
