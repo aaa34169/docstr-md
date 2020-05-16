@@ -52,7 +52,7 @@ class SklearnParser():
     '''
 
     parser = SklearnParser()
-    parser.parse(docstr_txt)
+    parser(docstr_txt)
     ```
 
     Out:
