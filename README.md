@@ -1,6 +1,6 @@
-# Docstring-Markdown
-
 Docstring-Markdown is a fast and easy way to make beautiful documentation markdown files.
+
+You can find the latest documentation at https://dsbowen.github.io/docstr-md.
 
 ## Why Docstring-Markdown
 
@@ -29,7 +29,7 @@ soup = PySoup(path='test.py', parser='sklearn')
 compile_md(soup, compiler='sklearn', outfile='test.md')
 ```
 
-You'll now have a `test.md` file in your current directory. [This](test.md) is what it looks like rendered.
+You'll now have a `test.md` file in your current directory. [This](https://dsbowen.github.io/docstr-md/test/) is what it looks like rendered.
 
 ## Citation
 
