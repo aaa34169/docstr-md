@@ -64,8 +64,16 @@
     <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonsoup_objectsexpr">docstr_md.python.soup_objects.Expr</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonsoup_objectsfunctiondef">docstr_md.python.soup_objects.FunctionDef</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonsoup_objectsclassdef">docstr_md.python.soup_objects.ClassDef</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#methods_1">Methods</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -118,6 +126,9 @@
 
 <p><link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" /></p>
 <style>
+    a.src-href {
+        float: right;
+    }
     p.attr {
         margin-top: 0.5em;
         margin-left: 1em;
@@ -147,7 +158,7 @@ be relatively easy to compile in a markdown file.</p>
 
 <h2 id="docstr_mdpythonsoup_objectsexpr">docstr_md.python.soup_objects.<strong>Expr</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>Expr</b>(<i>obj, parser='sklearn'</i>)
+    <i>class</i> docstr_md.python.soup_objects.<b>Expr</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L17">[source]</a>
 </p>
 
 <p>Stores an expression.</p>
@@ -182,7 +193,7 @@ be relatively easy to compile in a markdown file.</p>
 
 <h2 id="docstr_mdpythonsoup_objectsfunctiondef">docstr_md.python.soup_objects.<strong>FunctionDef</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>FunctionDef</b>(<i>obj, parser='sklearn'</i>)
+    <i>class</i> docstr_md.python.soup_objects.<b>FunctionDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L61">[source]</a>
 </p>
 
 <p>Stores a function.</p>
@@ -218,14 +229,38 @@ be relatively easy to compile in a markdown file.</p>
 <b>import_path : <i>str</i></b>
 <p class="attr">
     Python formatted import path, e.g. <code>'path.to.file.'</code>.
+</p>
+<b>src_path : <i>str</i></b>
+<p class="attr">
+    Path to file in the source code. e.g. <code>'path/to/file.py'</code>.
+</p>
+<b>src_href : <i>callable</i></b>
+<p class="attr">
+    Takes <code>self</code> and outputs a link to the this object in the source code repository.
 </p></td>
 </tr>
     </tbody>
 </table>
 
+<h4 id="methods">Methods</h4>
+<p class="func-header">
+    <i></i> <b>is_property</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L99">[source]</a>
+</p>
+
+<p>Indicates that this function is a getter, setter, or deleter.</p>
+<p>i.e. This function is a method of a class decorated with
+<code>@property</code>, <code>@x.setter</code>, or <code>@x.deleter</code>.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+
+    </tbody>
+</table>
+
 <h2 id="docstr_mdpythonsoup_objectsclassdef">docstr_md.python.soup_objects.<strong>ClassDef</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>ClassDef</b>(<i>obj, parser='sklearn'</i>)
+    <i>class</i> docstr_md.python.soup_objects.<b>ClassDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L115">[source]</a>
 </p>
 
 <p>Stores a class.</p>
@@ -262,6 +297,14 @@ be relatively easy to compile in a markdown file.</p>
 <p class="attr">
     Python formatted import path, e.g. <code>'path.to.file.'</code>.
 </p>
+<b>src_path : <i>str</i></b>
+<p class="attr">
+    Path to file in the source code. e.g. <code>'path/to/file.py'</code>.
+</p>
+<b>src_href : <i>callable</i></b>
+<p class="attr">
+    Takes <code>self</code> and outputs a link to the this object in the source code repository. Setting the <code>src_href</code> for self automatically sets the <code>src_href</code> attributes for its <code>methods</code>.
+</p>
 <b>methods : <i>list</i></b>
 <p class="attr">
     List of class methods as <code>FunctionDef</code> objects.
@@ -271,6 +314,20 @@ be relatively easy to compile in a markdown file.</p>
     Class constructor.
 </p></td>
 </tr>
+    </tbody>
+</table>
+
+<h4 id="methods_1">Methods</h4>
+<p class="func-header">
+    <i></i> <b>rm_properties</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L193">[source]</a>
+</p>
+
+<p>Remove methods with getter, setter, and deleter decorators.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+
     </tbody>
 </table>
               

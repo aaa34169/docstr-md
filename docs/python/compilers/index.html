@@ -65,7 +65,7 @@
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Compilers</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythoncompilerssklearnsklearncompiler">docstr_md.python.compilers.sklearn.SklearnCompiler</a>
+    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythoncompilerssklearn">docstr_md.python.compilers.Sklearn</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
     </li>
@@ -120,6 +120,9 @@
 
 <p><link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" /></p>
 <style>
+    a.src-href {
+        float: right;
+    }
     p.attr {
         margin-top: 0.5em;
         margin-left: 1em;
@@ -136,7 +139,7 @@
 </style>
 
 <h1 id="compilers">Compilers</h1>
-<h2 id="docstr_mdpythoncompilerssklearnsklearncompiler">docstr_md.python.compilers.sklearn.<strong>SklearnCompiler</strong></h2>
+<h2 id="docstr_mdpythoncompilerssklearn">docstr_md.python.compilers.<strong>Sklearn</strong></h2>
 <p>Compiles sklearn-style markdown.</p>
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
@@ -147,19 +150,18 @@
 </table>
 
 <h4 id="examples">Examples</h4>
-<pre><code class="python">from docstr_md.python import PySoup
-from docstr_md.python.compilers import SklearnCompiler
+<pre><code class="python">from docstr_md.python import PySoup, compilers
 
 # replace with the appropriate file path and parser
 soup = PySoup(path='path/to/file.py', parser='sklearn')
-compiler = SklearnCompiler()
+compiler = compilers.Sklearn()
 md = compiler(soup)
 </code></pre>
 
 <p><code>md</code> is a string of compiled markdown.</p>
 <h4 id="methods">Methods</h4>
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self, soup</i>)
+    <i></i> <b>__call__</b>(<i>self, soup</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/compilers/sklearn.py#L45">[source]</a>
 </p>
 
 <p>Compile markdown from soup.</p>

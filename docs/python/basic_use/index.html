@@ -126,6 +126,9 @@
 
 <p><link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" /></p>
 <style>
+    a.src-href {
+        float: right;
+    }
     p.attr {
         margin-top: 0.5em;
         margin-left: 1em;
@@ -152,7 +155,7 @@
 
 <h2 id="docstr_mdpythonpysoup">docstr_md.python.<strong>PySoup</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.<b>PySoup</b>(<i>code=None, path=None, parser='sklearn'</i>)
+    <i>class</i> docstr_md.python.<b>PySoup</b>(<i>code=None, path='', parser='sklearn', src_href=None</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L15">[source]</a>
 </p>
 
 <p><code>PySoup</code> parses raw Python code for easy conversion to markdown.</p>
@@ -166,7 +169,7 @@
 <p class="attr">
     Raw Python code.
 </p>
-<b>path : <i>str, default=None</i></b>
+<b>path : <i>str, default=''</i></b>
 <p class="attr">
     Path to python file. One of <code>code</code> or <code>path</code> must be specified.
 </p>
@@ -184,6 +187,18 @@
 <b>parser : <i>callable</i></b>
 <p class="attr">
     The input <code>parser</code>.
+</p>
+<b>import_path : <i>str</i></b>
+<p class="attr">
+    Import path for soup objects. Setting the import path for the soup automatically sets the import path for its <code>objects</code>.
+</p>
+<b>src_path : <i>str</i></b>
+<p class="attr">
+    Path to the file in the source code repository (e.g. Github). Setting the source code path for the soup automatically sets the source code path for its <code>objects</code>.
+</p>
+<b>src_href : <i>callable</i></b>
+<p class="attr">
+    The <code>src_href</code> takes a soup object (<code>FunctionDef</code> or <code>ClassDef</code>) and converts it to a link to the source code. Setting the <code>src_href</code> for the soup automatically sets the <code>src_href</code> attribute for its <code>objects</code>.
 </p></td>
 </tr>
     </tbody>
@@ -199,7 +214,7 @@ soup = PySoup(path='path/to/file.py', parser='sklearn')
 
 <h4 id="methods">Methods</h4>
 <p class="func-header">
-    <i></i> <b>convert_ast_object</b>(<i>self, obj</i>)
+    <i></i> <b>convert_ast_object</b>(<i>self, obj</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L116">[source]</a>
 </p>
 
 <p>Convert an <code>ast</code> object to a soup object.</p>
@@ -225,34 +240,33 @@ soup = PySoup(path='path/to/file.py', parser='sklearn')
 </table>
 
 <p class="func-header">
-    <i></i> <b>set_import_path</b>(<i>self, path</i>)
+    <i></i> <b>rm_properties</b>(<i>self</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L138">[source]</a>
 </p>
 
-<p>Set the import path for the soup and its <code>objects</code>.</p>
+<p>Remove methods with getter, setter, and deleter decorators from all
+<code>ClassDef</code> soup objects in the <code>objects</code> list.</p>
 <table class="docutils field-list field-table" frame="void" rules="none">
     <col class="field-name" />
     <col class="field-body" />
     <tbody valign="top">
-        <tr class="field">
-    <th class="field-name"><b>Parameters:</b></td>
-    <td class="field-body" width="100%"><b>path : <i>str</i></b>
-<p class="attr">
-    Path, usually to a .py file.
-</p></td>
-</tr>
-<tr class="field">
-    <th class="field-name"><b>Returns:</b></td>
-    <td class="field-body" width="100%"><b>None : <i></i></b>
-<p class="attr">
 
-</p></td>
-</tr>
     </tbody>
 </table>
 
+<p><strong>Examples</strong></p>
+<p>Create a python file with a class with methods decorated with
+<code>@property</code>, <code>@x.setter</code>, or <code>@x.deleter</code>.</p>
+<pre><code class="python">from docstr_md.python import PySoup
+
+soup = PySoup(path='path/to/file.py', parser='sklearn')
+soup.rm_properties()
+</code></pre>
+
+<p>The <code>ClassDef</code> soup objects' <code>methods</code> will no longer include
+properties.</p>
 <h2 id="docstr_mdpythoncompile_md">docstr_md.python.<strong>compile_md</strong></h2>
 <p class="func-header">
-    <i>def</i> docstr_md.python.<b>compile_md</b>(<i>soup, compiler='sklearn', outfile=None</i>)
+    <i>def</i> docstr_md.python.<b>compile_md</b>(<i>soup, compiler='sklearn', outfile=None</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L167">[source]</a>
 </p>
 
 <p>Compile markdown from a <code>PySoup</code> object.</p>

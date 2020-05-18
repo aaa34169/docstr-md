@@ -63,7 +63,7 @@
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Parsers</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonparserssklearnsklearnparser">docstr_md.python.parsers.sklearn.SklearnParser</a>
+    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonparserssklearn">docstr_md.python.parsers.Sklearn</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a>
     </li>
@@ -122,6 +122,9 @@
 
 <p><link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" /></p>
 <style>
+    a.src-href {
+        float: right;
+    }
     p.attr {
         margin-top: 0.5em;
         margin-left: 1em;
@@ -138,9 +141,9 @@
 </style>
 
 <h1 id="parsers">Parsers</h1>
-<h2 id="docstr_mdpythonparserssklearnsklearnparser">docstr_md.python.parsers.sklearn.<strong>SklearnParser</strong></h2>
+<h2 id="docstr_mdpythonparserssklearn">docstr_md.python.parsers.<strong>Sklearn</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.parsers.sklearn.<b>SklearnParser</b>(<i>raw_sections=['Notes', 'Examples']</i>)
+    <i>class</i> docstr_md.python.parsers.<b>Sklearn</b>(<i>raw_sections=['Notes', 'Examples']</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/parsers/sklearn.py#L5">[source]</a>
 </p>
 
 <p>Parses sklearn-style docstrings.</p>
@@ -166,9 +169,11 @@
 </table>
 
 <h4 id="notes">Notes</h4>
-<p><code>'\'</code> functions as an escape character when added to the beginning of a line. Whitespace to its left will be stripped. All text to its right will be treated as raw markdown.</p>
+<p><code>'\'</code> functions as an escape character when added to the beginning of a
+line. Whitespace to its left will be stripped. All text to its right will
+be treated as raw markdown.</p>
 <h4 id="examples">Examples</h4>
-<pre><code class="python">from docstr_md.python.parsers import SklearnParser
+<pre><code class="python">from docstr_md.python import parsers
 
 docstr_txt = '''
 Description.
@@ -195,7 +200,7 @@ Examples
 Here is an example.
 '''
 
-parser = SklearnParser()
+parser = parsers.Sklearn()
 parser(docstr_txt)
 </code></pre>
 
@@ -238,7 +243,7 @@ parser(docstr_txt)
 
 <h4 id="methods">Methods</h4>
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self, obj</i>)
+    <i></i> <b>__call__</b>(<i>self, obj</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/parsers/sklearn.py#L102">[source]</a>
 </p>
 
 <p>Parses the docstring.</p>
