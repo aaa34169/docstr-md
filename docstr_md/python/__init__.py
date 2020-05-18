@@ -1,7 +1,7 @@
 """#Basic Use"""
 
-from .compilers import SklearnCompiler
-from .parsers import SklearnParser
+from . import compilers
+from . import parsers
 from .soup_objects import Expr, FunctionDef, ClassDef
 
 from pathlib import PurePath
@@ -10,7 +10,7 @@ import ast
 import os
 import re
 
-parsers = {'sklearn': SklearnParser}
+_parsers = {'sklearn': parsers.Sklearn}
 
 class PySoup():
     """
@@ -21,7 +21,7 @@ class PySoup():
     code : str, default=None
         Raw Python code.
 
-    path : str, default=None
+    path : str, default=''
         Path to python file. One of `code` or `path` must be specified.
 
     parser : callable or str, default='sklearn'
@@ -39,6 +39,20 @@ class PySoup():
     parser : callable
         The input `parser`.
 
+    import_path : str
+        Import path for soup objects. Setting the import path for the soup automatically sets the import path for its `objects`.
+
+    src_path : str
+        Path to the file in the source code repository (e.g. Github). 
+        Setting the source code path for the soup automatically sets the 
+        source code path for its `objects`.
+
+    src_href : callable
+        The `src_href` takes a soup object (`FunctionDef` or `ClassDef`) 
+        and converts it to a link to the source code. Setting the 
+        `src_href` for the soup automatically sets the `src_href` attribute 
+        for its `objects`.
+
     Examples
     --------
     Create a python file with [parseable docstrings](../../python/parsers). 
@@ -50,18 +64,54 @@ class PySoup():
     soup = PySoup(path='path/to/file.py', parser='sklearn')
     ```
     """
-    def __init__(self, code=None, path=None, parser='sklearn'):
-        assert (code is None) != (path is None), 'Initialize with code xor path.'
-        code = code if path is None else open(path, 'r').read()
+    def __init__(self, code=None, path='', parser='sklearn', src_href=None):
+        assert (code is None) != (path==''), 'Initialize with code xor path.'
+        code = code if not path else open(path, 'r').read()
         if isinstance(parser, str):
-            parser = parsers[parser]()
+            parser = _parsers[parser]()
         self.parser = parser
         body = ast.parse(code).body
         self.objects = [
             self.convert_ast_object(obj) for obj in body
             if isinstance(obj, (ast.Expr, ast.FunctionDef, ast.ClassDef))
         ]
-        self.set_import_path(path)
+        self.import_path = path
+        self.src_path = path
+        self.src_href = src_href
+
+    @property
+    def import_path(self):
+        return self._import_path
+
+    @import_path.setter
+    def import_path(self, path):
+        path = re.sub(r'__init__.py$', '', path)
+        if path:
+            path = '.'.join(PurePath(os.path.splitext(path)[0]).parts)+'.'
+        self._setattr('import_path', path)
+
+    @property
+    def src_path(self):
+        return self._src_path
+
+    @src_path.setter
+    def src_path(self, path):
+        self._setattr('src_path', path)
+
+    @property
+    def src_href(self):
+        return self._src_href
+
+    @src_href.setter
+    def src_href(self, src_href):
+        self._setattr('src_href', src_href)
+
+    def _setattr(self, attr_name, val):
+        setattr(self, '_'+attr_name, val)
+        [
+            setattr(obj, attr_name, val) 
+            for obj in self.objects if hasattr(obj, attr_name)
+        ]
 
     def convert_ast_object(self, obj):
         """
@@ -85,30 +135,34 @@ class PySoup():
             return ClassDef(obj, self.parser)
         raise ValueError('obj type not recognized: ', str(obj))
 
-    def set_import_path(self, path):
+    def rm_properties(self):
         """
-        Set the import path for the soup and its `objects`.
+        Remove methods with getter, setter, and deleter decorators from all 
+        `ClassDef` soup objects in the `objects` list.
 
-        Parameters
-        ----------
-        path : str
-            Path, usually to a .py file.
+        Examples
+        --------
+        Create a python file with a class with methods decorated with 
+        `@property`, `@x.setter`, or `@x.deleter`. 
 
-        Returns
-        -------
-        None
+        ```python
+        from docstr_md.python import PySoup
+
+        soup = PySoup(path='path/to/file.py', parser='sklearn')
+        soup.rm_properties()
+        ```
+
+        The `ClassDef` soup objects' `methods` will no longer include 
+        properties.
         """
-        path = re.sub(r'__init__.py$', '', path)
-        if path:
-            path = '.'.join(PurePath(os.path.splitext(path)[0]).parts)+'.'
-        self.import_path = path
         [
-            setattr(obj, 'import_path', path) for obj in self.objects
-            if hasattr(obj, 'import_path')
+            obj.rm_properties() 
+            for obj in self.objects if isinstance(obj, ClassDef)
         ]
 
 
-compilers = {'sklearn': SklearnCompiler}
+
+_compilers = {'sklearn': compilers.Sklearn}
 
 def compile_md(soup, compiler='sklearn', outfile=None):
     """
@@ -148,7 +202,7 @@ def compile_md(soup, compiler='sklearn', outfile=None):
     You can find the compiled markdown file in `test.md`.
     """
     if isinstance(compiler, str):
-        compiler = compilers[compiler]()
+        compiler = _compilers[compiler]()
     md = compiler(soup)
     if outfile is not None:
         with open(outfile, 'w') as f:

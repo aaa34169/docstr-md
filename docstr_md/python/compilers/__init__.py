@@ -1,1 +1,1 @@
-from .sklearn import SklearnCompiler
+from .sklearn import Sklearn

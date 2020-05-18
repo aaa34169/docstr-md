@@ -15,6 +15,8 @@ with open(os.path.join(dir_path, 'head.html'), 'r') as head_f:
 title_template = '##{path}**{name}**'
 with open(os.path.join(dir_path, 'header.html'), 'r') as f:
     header_template = f.read()
+with open(os.path.join(dir_path, 'src_href.html'), 'r') as f:
+    src_href_template = f.read()
 with open(os.path.join(dir_path, 'table.html'), 'r') as f:
     table_template = f.read()
 with open(os.path.join(dir_path, 'field.html'), 'r') as f:
@@ -23,19 +25,18 @@ with open(os.path.join(dir_path, 'item.html'), 'r') as f:
     item_template = f.read()
     
     
-class SklearnCompiler():
+class Sklearn():
     """
     Compiles sklearn-style markdown.
 
     Examples
     --------
     ```python
-    from docstr_md.python import PySoup
-    from docstr_md.python.compilers import SklearnCompiler
+    from docstr_md.python import PySoup, compilers
 
     # replace with the appropriate file path and parser
     soup = PySoup(path='path/to/file.py', parser='sklearn')
-    compiler = SklearnCompiler()
+    compiler = compilers.Sklearn()
     md = compiler(soup)
     ```
 
@@ -79,7 +80,7 @@ class SklearnCompiler():
         if isinstance(obj, FunctionDef):
             return self._compile_func(obj)
         if isinstance(obj, ClassDef):
-            return self._compile_cls(obj)
+            return self._compile_class(obj)
         raise ValueError('Object not recognized:', obj)
 
     def _compile_docstr(self, docstr):
@@ -108,21 +109,21 @@ class SklearnCompiler():
             self._compile_sections(),
         ])
         
-    def _compile_cls(self, cls):
+    def _compile_class(self, class_):
         """
         Compile `ClassDef` soup object.
 
         Parameters
         ----------
-        cls : docstr_md.python.soup_objects.ClassDef
+        class_ : docstr_md.python.soup_objects.ClassDef
             Class object to be compiled.
         """
         return '\n\n'.join([
-            self._compile_func(cls.init, cls=cls),
-            self._compile_methods(cls.methods),
+            self._compile_func(class_.init, class_=class_),
+            self._compile_methods(class_.methods),
         ])
         
-    def _compile_func(self, func, method=False, cls=None):
+    def _compile_func(self, func, method=False, class_=None):
         """
         Compile `FunctionDef` soup object.
 
@@ -134,26 +135,26 @@ class SklearnCompiler():
         method: bool, default=False
             Indicates that this function is a method of a `ClassDef` object.
 
-        cls : docstr_md.python.soup_objects.ClassDef or None, default=None
-            `None` unless this is the `__init__` method. If this is the `__init__` method, `cls` is the Class object to whom the constructor belongs.
+        class_ : docstr_md.python.soup_objects.ClassDef or None, default=None
+            `None` unless this is the `__init__` method. If this is the `__init__` method, `class_` is the Class object to whom the constructor belongs.
         """
-        self.func, self.method, self.cls = func, method, cls
+        self.func, self.method, self.class_ = func, method, class_
         return '\n\n'.join([
             self._compile_title(),
             self._compile_header(),
-            self._compile_docstr(func.docstr if cls is None else cls.docstr)
+            self._compile_docstr(func.docstr if class_ is None else class_.docstr)
         ])
 
     def _compile_title(self):
         """Compile the object title."""
         if self.method:
             return ''
-        if self.cls is None:
+        if self.class_ is None:
             path = self.func.import_path
             name = self.func.name
         else:
-            path = self.cls.import_path
-            name = self.cls.name
+            path = self.class_.import_path
+            name = self.class_.name
         return title_template.format(path=path, name=name)
         
     def _compile_header(self):
@@ -161,24 +162,32 @@ class SklearnCompiler():
         if self.func is None:
             # True when class has no __init__ method
             return ''
-        if self.cls is None:
-            pfx = '' if self.method else 'def'
-            ldelim = '('
-            import_path = self.func.import_path
-            name = self.func.name
-        else:
-            pfx = 'class'
-            ldelim = '(self, '
-            import_path = self.cls.import_path
-            name = self.cls.name
+        pfx, ldelim, import_path, name, src_href = self._get_header_attrs(
+            self.class_ or self.func
+        )
         header = to_source(self.func.ast).splitlines()[0]
         args = header.split(ldelim, maxsplit=2)[-1].rsplit(')', maxsplit=2)[0]
+        src_href = src_href_template.format(href=src_href) if src_href else ''
         return header_template.format(
             pfx=pfx,
             import_path=import_path,
             name=name,
-            args=args
+            args=args,
+            src_href=src_href,
         )
+
+    def _get_header_attrs(self, obj):
+        assert(isinstance(obj, (FunctionDef, ClassDef)))
+        if isinstance(obj, FunctionDef):
+            pfx = '' if self.method else 'def'
+            ldelim = '('
+        else:
+            pfx = 'class'
+            ldelim = '(self, '
+        return (
+            pfx, ldelim, obj.import_path, obj.name, obj.compile_src_href()
+        )
+        
     
     def _compile_fields(self):
         """Compile fields."""

@@ -2,7 +2,7 @@ import ast
 import re
 
 
-class SklearnParser():
+class Sklearn():
     """
     Parses sklearn-style docstrings.
 
@@ -19,12 +19,14 @@ class SklearnParser():
 
     Notes
     -----
-    `'\\'` functions as an escape character when added to the beginning of a line. Whitespace to its left will be stripped. All text to its right will be treated as raw markdown.
+    `'\\'` functions as an escape character when added to the beginning of a 
+    line. Whitespace to its left will be stripped. All text to its right will 
+    be treated as raw markdown.
 
     Examples
     --------
     ```python
-    from docstr_md.python.parsers import SklearnParser
+    from docstr_md.python import parsers
 
     docstr_txt = '''
     Description.
@@ -51,7 +53,7 @@ class SklearnParser():
     \Here is an example.
     '''
 
-    parser = SklearnParser()
+    parser = parsers.Sklearn()
     parser(docstr_txt)
     ```
 
