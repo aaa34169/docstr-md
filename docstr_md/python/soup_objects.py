@@ -55,6 +55,9 @@ class Object():
         self.lineno = obj.lineno
 
     def compile_src_href(self):
+        """
+        Compile hyperlink ot object source code.
+        """
         return '' if self.src_href is None else self.src_href(self)
         
 
