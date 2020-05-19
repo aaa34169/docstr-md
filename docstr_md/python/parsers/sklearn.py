@@ -8,7 +8,7 @@ class Sklearn():
 
     Parameters
     ----------
-    raw_sections : iterable of strings, default=['Notes','Examples']
+    raw_sections : iterable of strings, default=('Notes','Examples')
         List of section names whose content will be treated as raw markdown. 
         Other sections are treated as fields.
 
@@ -96,7 +96,7 @@ class Sklearn():
     }
     ```
     """
-    def __init__(self, raw_sections=['Notes', 'Examples']):
+    def __init__(self, raw_sections=('Notes', 'Examples')):
         self.raw_sections = raw_sections
 
     def __call__(self, obj):

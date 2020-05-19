@@ -166,7 +166,7 @@ class Sklearn():
             self.class_ or self.func
         )
         header = to_source(self.func.ast).splitlines()[0]
-        args = header.split(ldelim, maxsplit=2)[-1].rsplit(')', maxsplit=2)[0]
+        args = header.split(ldelim, maxsplit=1)[-1].rsplit(')', maxsplit=1)[0]
         src_href = src_href_template.format(href=src_href) if src_href else ''
         return header_template.format(
             pfx=pfx,

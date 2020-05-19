@@ -1,4 +1,4 @@
-"""#Soup objects
+"""# Soup objects
 
 This file defines soup objects. `PySoup` derives soup objects from their `ast` 
 equivalents and stores them in its `objects` attribute. These are designed to 
@@ -105,6 +105,11 @@ class FunctionDef(Object):
 
         i.e. This function is a method of a class decorated with 
         `@property`, `@x.setter`, or `@x.deleter`.
+
+        Returns
+        -------
+        is_property : bool
+            Indicator that this function is a property.
         """
         for decorator in self.ast.decorator_list:
             if isinstance(decorator, ast.Name) and decorator.id == 'property':
@@ -196,5 +201,10 @@ class ClassDef(Object):
     def rm_properties(self):
         """
         Remove methods with getter, setter, and deleter decorators.
+
+        Returns
+        -------
+        self : docstr_md.python.soup_objects.ClassDef
         """
         self.methods = [m for m in self.methods if not m.is_property()]
+        return self

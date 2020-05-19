@@ -1,4 +1,4 @@
-"""#Basic Use"""
+"""# Basic Use"""
 
 from . import compilers
 from . import parsers
@@ -14,7 +14,7 @@ _parsers = {'sklearn': parsers.Sklearn}
 
 class PySoup():
     """
-    `PySoup` parses raw Python code for easy conversion to markdown.
+    This class parses raw Python code for easy conversion to markdown.
 
     Parameters
     ----------
@@ -70,14 +70,28 @@ class PySoup():
         if isinstance(parser, str):
             parser = _parsers[parser]()
         self.parser = parser
+        self._get_objects(code)
+        self.import_path = path
+        self.src_path = path
+        self.src_href = src_href
+
+    def _get_objects(self, code):
+        """
+        Get objects from raw code as string. Objects of interest are 
+        docstrings (expressions), functions, and classes. Excludes private 
+        objects, indicated by names starting with '_'.
+
+        Parameters
+        ----------
+        code : str
+            Raw python code
+        """
         body = ast.parse(code).body
         self.objects = [
             self.convert_ast_object(obj) for obj in body
             if isinstance(obj, (ast.Expr, ast.FunctionDef, ast.ClassDef))
+            and (not hasattr(obj, 'name') or not obj.name.startswith('_'))
         ]
-        self.import_path = path
-        self.src_path = path
-        self.src_href = src_href
 
     @property
     def import_path(self):
@@ -140,6 +154,10 @@ class PySoup():
         Remove methods with getter, setter, and deleter decorators from all 
         `ClassDef` soup objects in the `objects` list.
 
+        Returns
+        -------
+        self : docstr_md.python.PySoup
+
         Examples
         --------
         Create a python file with a class with methods decorated with 
@@ -159,6 +177,7 @@ class PySoup():
             obj.rm_properties() 
             for obj in self.objects if isinstance(obj, ClassDef)
         ]
+        return self
 
 
 
