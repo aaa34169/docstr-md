@@ -40,12 +40,12 @@ You'll now have a `test.md` file in your current directory. [This](test.md) is w
   author = {Dillon Bowen},
   title = {Docstring-Markdown},
   url = {https://dsbowen.github.io/docstr-md/},
-  date = {2020-05-15},
+  date = {2020-06-04},
 }
 ```
 
 ## License
 
-Users must cite Docstring-Markdown in any publications which use this software.
+Users must cite this package in any publications which use it.
 
-Docstring-Markdown is licensed with the MIT [License](https://github.com/dsbowen/docstr-md/blob/master/LICENSE).
+It is licensed with the MIT [License](https://github.com/dsbowen/docstr-md/blob/master/LICENSE).

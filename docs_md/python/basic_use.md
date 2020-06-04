@@ -151,7 +151,7 @@ Remove methods with getter, setter, and deleter decorators from all
     </tbody>
 </table>
 
-**Examples**
+####Examples
 
 Create a python file with a class with methods decorated with
 `@property`, `@x.setter`, or `@x.deleter`.

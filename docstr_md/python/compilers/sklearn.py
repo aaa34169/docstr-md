@@ -4,6 +4,7 @@ from astor import to_source
 from markdown import markdown
 
 import os
+from copy import deepcopy
 
 dir_path = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -103,6 +104,7 @@ class Sklearn():
             Compiled markdown for the docstring.
         """
         self.docstr = docstr
+        self.method = False
         return '\n\n'.join([
             docstr['description'],
             self._compile_fields(),
@@ -165,7 +167,7 @@ class Sklearn():
         pfx, ldelim, import_path, name, src_href = self._get_header_attrs(
             self.class_ or self.func
         )
-        header = to_source(self.func.ast).splitlines()[0]
+        header = self._get_header(self.func.ast)
         args = header.split(ldelim, maxsplit=1)[-1].rsplit(')', maxsplit=1)[0]
         src_href = src_href_template.format(href=src_href) if src_href else ''
         return header_template.format(
@@ -177,6 +179,30 @@ class Sklearn():
         )
 
     def _get_header_attrs(self, obj):
+        """
+        Get header attributes.
+
+        Arguments
+        ---------
+        obj : ast.FunctionDef or ast.ClassDef
+
+        Returns
+        -------
+        pfx : str
+            Header prefix.
+
+        ldelim : str
+            Left delimiter.
+
+        path : str
+            Import path.
+
+        name : str
+            Name of the function or class.
+
+        src_href : str
+            Hyperref to the source code.
+        """
         assert(isinstance(obj, (FunctionDef, ClassDef)))
         if isinstance(obj, FunctionDef):
             pfx = '' if self.method else 'def'
@@ -188,6 +214,23 @@ class Sklearn():
             pfx, ldelim, obj.import_path, obj.name, obj.compile_src_href()
         )
         
+    def _get_header(self, obj):
+        """
+        Get the function or method header.
+
+        Arguments
+        ---------
+        obj : ast.FunctionDef or ast.ClassDef
+
+        Returns
+        -------
+        head : str
+            String representation of the function or method head.
+        """
+        obj = deepcopy(obj)
+        obj.body.clear()
+        header = to_source(obj).splitlines()
+        return ' '.join(line.strip() for line in header)
     
     def _compile_fields(self):
         """Compile fields."""

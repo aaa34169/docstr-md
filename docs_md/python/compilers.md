@@ -53,7 +53,7 @@ md = compiler(soup)
 
 
 <p class="func-header">
-    <i></i> <b>__call__</b>(<i>self, soup</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/compilers/sklearn.py#L45">[source]</a>
+    <i></i> <b>__call__</b>(<i>self, soup</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/compilers/sklearn.py#L46">[source]</a>
 </p>
 
 Compile markdown from soup.

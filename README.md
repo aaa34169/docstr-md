@@ -1,7 +1,5 @@
 Docstring-Markdown is a fast and easy way to make beautiful documentation markdown files.
 
-You can find the latest documentation at https://dsbowen.github.io/docstr-md.
-
 ## Why Docstring-Markdown
 
 It's time to share your awesome new package with the world. And... get ready to spend the next week making your docs. Or, make beautiful docs with Docstring-Markdown in just a few lines of code.
