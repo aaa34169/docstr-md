@@ -35,10 +35,10 @@ be relatively easy to compile in a markdown file.
 
 
 
-##docstr_md.python.soup_objects.**Expr**
+##docstr_md.python.**Expr**
 
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>Expr</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L17">[source]</a>
+    <i>class</i> docstr_md.python.<b>Expr</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L17">[source]</a>
 </p>
 
 Stores an expression.
@@ -76,10 +76,10 @@ Stores an expression.
 
 
 
-##docstr_md.python.soup_objects.**FunctionDef**
+##docstr_md.python.**FunctionDef**
 
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>FunctionDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L64">[source]</a>
+    <i>class</i> docstr_md.python.<b>FunctionDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L64">[source]</a>
 </p>
 
 Stores a function.
@@ -160,10 +160,10 @@ i.e. This function is a method of a class decorated with
 
 
 
-##docstr_md.python.soup_objects.**ClassDef**
+##docstr_md.python.**ClassDef**
 
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>ClassDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L123">[source]</a>
+    <i>class</i> docstr_md.python.<b>ClassDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L123">[source]</a>
 </p>
 
 Stores a class.
@@ -240,6 +240,68 @@ Remove methods with getter, setter, and deleter decorators.
         <tr class="field">
     <th class="field-name"><b>Returns:</b></td>
     <td class="field-body" width="100%"><b>self : <i>docstr_md.python.soup_objects.ClassDef</i></b>
+<p class="attr">
+    
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+
+
+
+
+<p class="func-header">
+    <i></i> <b>rm_methods</b>(<i>self, *names</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L212">[source]</a>
+</p>
+
+Remove methods by name.
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Method names to remove.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.ClassDef</i></b>
+<p class="attr">
+    
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+
+
+
+
+<p class="func-header">
+    <i></i> <b>keep_methods</b>(<i>self, *names</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L228">[source]</a>
+</p>
+
+Keep methods by name.
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Method names to keep.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.ClassDef</i></b>
 <p class="attr">
     
 </p></td>

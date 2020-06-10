@@ -66,15 +66,15 @@
                     </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Soup objects</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonsoup_objectsexpr">docstr_md.python.soup_objects.Expr</a>
+    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonexpr">docstr_md.python.Expr</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonsoup_objectsfunctiondef">docstr_md.python.soup_objects.FunctionDef</a>
+    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonfunctiondef">docstr_md.python.FunctionDef</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonsoup_objectsclassdef">docstr_md.python.soup_objects.ClassDef</a>
+    <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythonclassdef">docstr_md.python.ClassDef</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#methods_1">Methods</a>
     </li>
@@ -164,9 +164,9 @@ be relatively easy to compile in a markdown file.</p>
     </tbody>
 </table>
 
-<h2 id="docstr_mdpythonsoup_objectsexpr">docstr_md.python.soup_objects.<strong>Expr</strong></h2>
+<h2 id="docstr_mdpythonexpr">docstr_md.python.<strong>Expr</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>Expr</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L17">[source]</a>
+    <i>class</i> docstr_md.python.<b>Expr</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L17">[source]</a>
 </p>
 
 <p>Stores an expression.</p>
@@ -199,9 +199,9 @@ be relatively easy to compile in a markdown file.</p>
     </tbody>
 </table>
 
-<h2 id="docstr_mdpythonsoup_objectsfunctiondef">docstr_md.python.soup_objects.<strong>FunctionDef</strong></h2>
+<h2 id="docstr_mdpythonfunctiondef">docstr_md.python.<strong>FunctionDef</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>FunctionDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L64">[source]</a>
+    <i>class</i> docstr_md.python.<b>FunctionDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L64">[source]</a>
 </p>
 
 <p>Stores a function.</p>
@@ -272,9 +272,9 @@ be relatively easy to compile in a markdown file.</p>
     </tbody>
 </table>
 
-<h2 id="docstr_mdpythonsoup_objectsclassdef">docstr_md.python.soup_objects.<strong>ClassDef</strong></h2>
+<h2 id="docstr_mdpythonclassdef">docstr_md.python.<strong>ClassDef</strong></h2>
 <p class="func-header">
-    <i>class</i> docstr_md.python.soup_objects.<b>ClassDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L123">[source]</a>
+    <i>class</i> docstr_md.python.<b>ClassDef</b>(<i>obj, parser='sklearn'</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L123">[source]</a>
 </p>
 
 <p>Stores a class.</p>
@@ -344,6 +344,58 @@ be relatively easy to compile in a markdown file.</p>
         <tr class="field">
     <th class="field-name"><b>Returns:</b></td>
     <td class="field-body" width="100%"><b>self : <i>docstr_md.python.soup_objects.ClassDef</i></b>
+<p class="attr">
+
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+<p class="func-header">
+    <i></i> <b>rm_methods</b>(<i>self, *names</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L212">[source]</a>
+</p>
+
+<p>Remove methods by name.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Method names to remove.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.ClassDef</i></b>
+<p class="attr">
+
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+<p class="func-header">
+    <i></i> <b>keep_methods</b>(<i>self, *names</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/soup_objects.py#L228">[source]</a>
+</p>
+
+<p>Keep methods by name.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Method names to keep.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.ClassDef</i></b>
 <p class="attr">
 
 </p></td>

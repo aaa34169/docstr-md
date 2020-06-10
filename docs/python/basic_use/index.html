@@ -70,11 +70,13 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples_1">Examples</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#docstr_mdpythoncompile_md">docstr_md.python.compile_md</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#examples_1">Examples</a>
+    <li class="toctree-l3"><a class="reference internal" href="#examples_2">Examples</a>
     </li>
         </ul>
     </li>
@@ -267,7 +269,7 @@ soup = PySoup(path='path/to/file.py', parser='sklearn')
     </tbody>
 </table>
 
-<p><strong>Examples</strong></p>
+<h4 id="examples_1">Examples</h4>
 <p>Create a python file with a class with methods decorated with
 <code>@property</code>, <code>@x.setter</code>, or <code>@x.deleter</code>.</p>
 <pre><code class="python">from docstr_md.python import PySoup
@@ -278,9 +280,65 @@ soup.rm_properties()
 
 <p>The <code>ClassDef</code> soup objects' <code>methods</code> will no longer include
 properties.</p>
+<p class="func-header">
+    <i></i> <b>rm_objects</b>(<i>self, *names</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L182">[source]</a>
+</p>
+
+<p>Remove objects by name.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Object names to remove.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.PySoup</i></b>
+<p class="attr">
+
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+<p class="func-header">
+    <i></i> <b>keep_objects</b>(<i>self, *names, keep_expr=True</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L201">[source]</a>
+</p>
+
+<p>Keep objects by name.</p>
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Object names to keep.
+</p>
+<b>keep_expr : <i>bool, default=True</i></b>
+<p class="attr">
+    Indicates that expressions (which don't have names) should be kept.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.PySoup</i></b>
+<p class="attr">
+
+</p></td>
+</tr>
+    </tbody>
+</table>
+
 <h2 id="docstr_mdpythoncompile_md">docstr_md.python.<strong>compile_md</strong></h2>
 <p class="func-header">
-    <i>def</i> docstr_md.python.<b>compile_md</b>(<i>soup, compiler='sklearn', outfile=None</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L186">[source]</a>
+    <i>def</i> docstr_md.python.<b>compile_md</b>(<i>soup, compiler='sklearn', outfile=None</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L232">[source]</a>
 </p>
 
 <p>Compile markdown from a <code>PySoup</code> object.</p>
@@ -313,7 +371,7 @@ properties.</p>
     </tbody>
 </table>
 
-<h4 id="examples_1">Examples</h4>
+<h4 id="examples_2">Examples</h4>
 <p>Create a python file with <a href="../../python/parsers">parseable docstrings</a>.</p>
 <pre><code class="python">from docstr_md.python import PySoup, compile_md
 

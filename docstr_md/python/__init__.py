@@ -179,6 +179,52 @@ class PySoup():
         ]
         return self
 
+    def rm_objects(self, *names):
+        """
+        Remove objects by name.
+
+        Parameters
+        ----------
+        \*names : str
+            Object names to remove.
+
+        Returns
+        -------
+        self : docstr_md.python.PySoup
+        """
+        self.objects = [
+            obj for obj in self.objects
+            if not hasattr(obj, 'name') or obj.name not in names
+        ]
+        return self
+
+    def keep_objects(self, *names, keep_expr=True):
+        """
+        Keep objects by name.
+
+        Parameters
+        ----------
+        \*names : str
+            Object names to keep.
+
+        keep_expr : bool, default=True
+            Indicates that expressions (which don't have names) should be 
+            kept.
+
+        Returns
+        -------
+        self : docstr_md.python.PySoup
+        """
+        objects = []
+        for obj in self.objects:
+            if hasattr(obj, 'name'):
+                if obj.name in names:
+                    objects.append(obj)
+            elif keep_expr:
+                objects.append(obj)
+        self.objects = objects
+        return self
+
 
 
 _compilers = {'sklearn': compilers.Sklearn}

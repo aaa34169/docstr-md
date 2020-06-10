@@ -208,3 +208,35 @@ class ClassDef(Object):
         """
         self.methods = [m for m in self.methods if not m.is_property()]
         return self
+
+    def rm_methods(self, *names):
+        """
+        Remove methods by name.
+
+        Parameters
+        ----------
+        \*names : str
+            Method names to remove.
+
+        Returns
+        -------
+        self : docstr_md.python.ClassDef
+        """
+        self.methods = [m for m in self.methods if m.name not in names]
+        return self
+
+    def keep_methods(self, *names):
+        """
+        Keep methods by name.
+
+        Parameters
+        ----------
+        \*names : str
+            Method names to keep.
+
+        Returns
+        -------
+        self : docstr_md.python.ClassDef
+        """
+        self.methods = [m for m in self.methods if m.name in names]
+        return self

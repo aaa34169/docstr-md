@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="docstr-md",
-    version="0.0.8",
+    version="0.0.9",
     author="Dillon Bowen",
     author_email="dsbowen@wharton.upenn.edu",
     description="A fast and easy way to make beautiful documentation markdown files.",

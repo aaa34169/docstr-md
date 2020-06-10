@@ -14,13 +14,10 @@ soup.objects.insert(0, '#Linking to source code')
 compile_md(soup, compiler='sklearn', outfile='docs_md/src_href.md')
 
 path = 'docstr_md/python/soup_objects.py'
-classes = ('Expr', 'FunctionDef', 'ClassDef')
 soup = PySoup(path=path, parser='sklearn', src_href=src_href)
-soup.objects = [
-    obj for obj in soup.objects 
-    if not hasattr(obj, 'name') or obj.name in classes
-]
+soup.keep_objects('Expr', 'FunctionDef', 'ClassDef')
 soup.rm_properties()
+soup.import_path = 'docstr_md/python'
 compile_md(soup, compiler='sklearn', outfile='docs_md/python/soup_objects.md')
 
 path = 'docstr_md/python/parsers/sklearn.py'

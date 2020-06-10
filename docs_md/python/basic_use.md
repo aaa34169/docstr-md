@@ -166,10 +166,76 @@ soup.rm_properties()
 The `ClassDef` soup objects' `methods` will no longer include
 properties.
 
+
+
+<p class="func-header">
+    <i></i> <b>rm_objects</b>(<i>self, *names</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L182">[source]</a>
+</p>
+
+Remove objects by name.
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Object names to remove.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.PySoup</i></b>
+<p class="attr">
+    
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+
+
+
+
+<p class="func-header">
+    <i></i> <b>keep_objects</b>(<i>self, *names, keep_expr=True</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L201">[source]</a>
+</p>
+
+Keep objects by name.
+
+<table class="docutils field-list field-table" frame="void" rules="none">
+    <col class="field-name" />
+    <col class="field-body" />
+    <tbody valign="top">
+        <tr class="field">
+    <th class="field-name"><b>Parameters:</b></td>
+    <td class="field-body" width="100%"><b>*names : <i>str</i></b>
+<p class="attr">
+    Object names to keep.
+</p>
+<b>keep_expr : <i>bool, default=True</i></b>
+<p class="attr">
+    Indicates that expressions (which don't have names) should be kept.
+</p></td>
+</tr>
+<tr class="field">
+    <th class="field-name"><b>Returns:</b></td>
+    <td class="field-body" width="100%"><b>self : <i>docstr_md.python.PySoup</i></b>
+<p class="attr">
+    
+</p></td>
+</tr>
+    </tbody>
+</table>
+
+
+
 ##docstr_md.python.**compile_md**
 
 <p class="func-header">
-    <i>def</i> docstr_md.python.<b>compile_md</b>(<i>soup, compiler='sklearn', outfile=None</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L186">[source]</a>
+    <i>def</i> docstr_md.python.<b>compile_md</b>(<i>soup, compiler='sklearn', outfile=None</i>) <a class="src-href" target="_blank" href="https://github.com/dsbowen/docstr-md/blob/master/docstr_md/python/__init__.py#L232">[source]</a>
 </p>
 
 Compile markdown from a `PySoup` object.
