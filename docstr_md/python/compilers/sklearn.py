@@ -11,9 +11,14 @@ dir_path = os.path.join(
     'sklearn_templates'
 )
 
-with open(os.path.join(dir_path, 'head.html'), 'r') as head_f:
-    head = head_f.read()
-title_template = '##{path}**{name}**'
+# with open(os.path.join(dir_path, 'head.html'), 'r') as head_f:
+#     head = head_f.read()
+
+head = "---\n\
+title: {path}\n\
+---\n"
+
+title_template = '### {path}**{name}**'
 with open(os.path.join(dir_path, 'header.html'), 'r') as f:
     header_template = f.read()
 with open(os.path.join(dir_path, 'src_href.html'), 'r') as f:
@@ -24,8 +29,8 @@ with open(os.path.join(dir_path, 'field.html'), 'r') as f:
     field_template = f.read()
 with open(os.path.join(dir_path, 'item.html'), 'r') as f:
     item_template = f.read()
-    
-    
+
+
 class Sklearn():
     """
     Compiles sklearn-style markdown.
@@ -57,8 +62,9 @@ class Sklearn():
         md : str
             Compiled markdown.
         """
-        return head+'\n\n'.join([self._compile(obj) for obj in soup.objects])
-    
+        # head.format(path=soup.src_path)
+        return head.format(path=soup.src_path.replace("\\",".")[:-3])+'\n\n'.join([self._compile(obj) for obj in soup.objects])
+
     def _compile(self, obj):
         """
         Compile object
@@ -66,7 +72,7 @@ class Sklearn():
         Parameters
         ----------
         obj : soup object or str
-            If `obj` is a string, it is treated as raw markdown. Otherwise, 
+            If `obj` is a string, it is treated as raw markdown. Otherwise,
             the object is compiled depending in its type.
 
         Returns
@@ -91,11 +97,11 @@ class Sklearn():
         Parameters
         ----------
         docstr : dict
-            Parsed docstring dictionary. A dictionary contains a description 
-            (str), raw markdown sections (list), and fields (list). Each 
-            section is a (name, markdown) tuple. Each field contains a name 
-            (str) and items (list). Each item contains a name (str), a short 
-            description (usually the data type, str), and a long description 
+            Parsed docstring dictionary. A dictionary contains a description
+            (str), raw markdown sections (list), and fields (list). Each
+            section is a (name, markdown) tuple. Each field contains a name
+            (str) and items (list). Each item contains a name (str), a short
+            description (usually the data type, str), and a long description
             (str).
 
         Returns
@@ -110,7 +116,7 @@ class Sklearn():
             self._compile_fields(),
             self._compile_sections(),
         ])
-        
+
     def _compile_class(self, class_):
         """
         Compile `ClassDef` soup object.
@@ -124,7 +130,7 @@ class Sklearn():
             self._compile_func(class_.init, class_=class_),
             self._compile_methods(class_.methods),
         ])
-        
+
     def _compile_func(self, func, method=False, class_=None):
         """
         Compile `FunctionDef` soup object.
@@ -158,7 +164,7 @@ class Sklearn():
             path = self.class_.import_path
             name = self.class_.name
         return title_template.format(path=path, name=name)
-        
+
     def _compile_header(self):
         """Compile function header."""
         if self.func is None:
@@ -213,7 +219,7 @@ class Sklearn():
         return (
             pfx, ldelim, obj.import_path, obj.name, obj.compile_src_href()
         )
-        
+
     def _get_header(self, obj):
         """
         Get the function or method header.
@@ -231,41 +237,41 @@ class Sklearn():
         obj.body.clear()
         header = to_source(obj).splitlines()
         return ' '.join(line.strip() for line in header)
-    
+
     def _compile_fields(self):
         """Compile fields."""
         fields = '\n'.join([
             self._compile_field(field) for field in self.docstr['fields']
         ])
         return table_template.format(fields=fields)
-    
+
     def _compile_field(self, field):
         """Compile a single field."""
         items = '\n'.join(
             [self._compile_item(item) for item in field['items']]
         )
         return field_template.format(name=field['name'], items=items)
-    
+
     def _compile_item(self, item):
         """Compile a single item."""
         item = {key: markdown(val)[3:-4] for key, val in item.items()}
         return item_template.format(**item)
-    
+
     def _compile_sections(self):
         """Compile raw markdown sections."""
         return '\n\n'.join([
             self._compile_section(s) for s in self.docstr['sections']
         ])
-    
+
     def _compile_section(self, section):
         """Compile a single raw markdown section."""
-        name_template = '**{}**\n\n' if self.method else '#'*4+'{}\n\n'
+        name_template = '**{}**\n\n' if self.method else '#'*4+' {}\n\n'
         return name_template.format(section[0]) + section[1]
-    
+
     def _compile_methods(self, methods):
         """Compile methods of a `ClassDef` object."""
         if not methods:
             return ''
-        return '#'*4+'Methods\n\n'+'\n\n'.join([
+        return '#'*4+' Methods\n\n'+'\n\n'.join([
             self._compile_func(method, method=True) for method in methods
         ])
